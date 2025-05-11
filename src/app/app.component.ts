@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {FooterMenuComponent} from './components/footer-menu/footer-menu.component';
+import {GameService} from './db/services/game.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,6 @@ import {FooterMenuComponent} from './components/footer-menu/footer-menu.componen
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'InflatablePWA';
+  constructor(private gameService: GameService) {
+  }
 }
