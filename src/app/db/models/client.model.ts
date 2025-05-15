@@ -4,7 +4,7 @@ export interface Client {
   id?: number;
   name: string;
   gameName: string;
-
+  gameId: number;
   // Monto total pagado (sumatoria si amplía tiempo)
   totalAmount: number;
 

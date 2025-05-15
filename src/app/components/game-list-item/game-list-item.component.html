@@ -1,13 +1,14 @@
-<div class="flex max-w-md overflow-hidden bg-white rounded-lg shadow-lg m-4">
+<div class="flex max-w-md overflow-hidden bg-white rounded-lg shadow-lg">
   <div class="p-5 flex flex-col justify-between w-full">
-    <h2 class="text-xl font-semibold text-gray-900">Nombre de juego</h2>
+    <h2 class="text-xl font-semibold text-gray-900">{{game?.name}}</h2>
     <hr class="my-3 border-gray-300" />
     <div class="flex justify-between item-cente">
       <div class="text-sm text-gray-700 space-y-1">
-        <p><strong>Tiempo mínimo:</strong> 10 minutos</p>
-        <p><strong>Valor mínimo:</strong> $1.000</p>
+        <p><strong>Cobro Inicial:</strong> {{game?.baseMinutes}} minutos | {{game?.initialValue | currency}}</p>
+        <p><strong>Cobro por minuto:</strong> {{game?.minuteValue | currency}} </p>
       </div>
-      <button class="px-3 py-2 text-xs font-bold text-white uppercase bg-gray-800 rounded">
+      <button (click)="editGameOnClick()"
+        class="px-3 py-2 text-xs font-bold text-white uppercase bg-gray-800 rounded">
         Editar
       </button>
     </div>

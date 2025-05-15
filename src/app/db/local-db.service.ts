@@ -22,6 +22,10 @@ export class LocalDBService {
     return firstValueFrom(this.db.getByKey<T>(store, id));
   }
 
+  getAllByIndex<T>(store: string, index: string, keyRange: IDBKeyRange): Promise<T[]> {
+    return firstValueFrom(this.db.getAllByIndex<T>(store, index, keyRange));
+  }
+
   getAll<T>(store: string): Promise<T[]> {
     return firstValueFrom(this.db.getAll<T>(store));
   }

@@ -18,6 +18,33 @@ export class ClientService {
     return this.db.getAll<Client>(this.store);
   }
 
+  async getAllByGameId(gameId: number): Promise<Client[]> {
+    const waiting = await this.db.getAllByIndex<Client>(
+      this.store,
+      'gameId_status',
+      IDBKeyRange.only([gameId, 'waiting'])
+    );
+
+    const playing = await this.db.getAllByIndex<Client>(
+      this.store,
+      'gameId_status',
+      IDBKeyRange.only([gameId, 'playing'])
+    );
+
+    return [...waiting, ...playing];
+  }
+
+  async setPlayingStatus(id: number) {
+    const client = await this.db.getById<Client>(this.store, id);
+    if (!client) return;
+
+    client.startedAt = Date.now();
+    client.endedAt = client.startedAt + (client.totalSecondsPaid * 1000);
+    client.status = 'playing';
+
+    return await this.db.update(this.store, client);
+  }
+
   update(client: Client) {
     return this.db.update<Client>(this.store, client);
   }

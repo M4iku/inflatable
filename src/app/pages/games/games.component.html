@@ -1,12 +1,32 @@
-<app-game-list-item></app-game-list-item>
+<!-- Todas las vistas conviven en la misma posición visual -->
+<div [@slidePages]="currentView" class="relative">
 
-<div class="m-4">
-  <button type="button" class="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-    </svg>
-    &nbsp;Agregar
-  </button>
+  <div *ngIf="currentView === 'list'" class="absolute inset-0 flex flex-col m-4 gap-3">
+    <app-game-list-item (editGame)="goToEdit(game)"
+                        [game]="game"
+                        *ngFor="let game of list" />
+
+    <div class="flex pb-4">
+      <button (click)="goToAdd()" class="bg-red-600 text-white px-4 py-2 rounded w-full">Agregar</button>
+    </div>
+  </div>
+  <!-- ADD -->
+  <div *ngIf="currentView === 'add'" class="absolute inset-0 p-4 space-y-4 h-full">
+    <div>
+      <button (click)="goBack()" class="text-blue-600">&larr; Volver</button>
+    </div>
+    <div>
+      <app-game-form (submitted)="createGame($event)"></app-game-form>
+    </div>
+  </div>
+
+  <!-- EDIT -->
+  <div *ngIf="currentView === 'edit'" class="absolute inset-0 p-4 space-y-4 h-full">
+    <div class="flex w-full justify-end">
+      <button (click)="goBack()" class="text-blue-600">Volver&nbsp;&rarr;</button>
+    </div>
+    <div>
+      <app-game-form (submitted)="editGame($event)" [initialData]="currentGame" mode="edit"></app-game-form>
+    </div>
+  </div>
 </div>
-
-

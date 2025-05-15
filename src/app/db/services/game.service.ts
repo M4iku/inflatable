@@ -12,6 +12,10 @@ export class GameService {
     return this.db.add<Game>(this.store, game);
   }
 
+  editGame(game: Game) {
+    return this.db.update<Game>(this.store, game);
+  }
+
   getAllGames(): Promise<Game[]> {
     return this.db.getAll<Game>(this.store);
   }
@@ -22,5 +26,9 @@ export class GameService {
 
   clearAll() {
     return this.db.clear(this.store);
+  }
+
+  deleteGame(id: number) {
+    return this.db.delete(this.store, id);
   }
 }
