@@ -1,0 +1,20 @@
+<div class="relative mb-1">
+  <label [for]="id" class="block text-sm font-medium text-gray-700 mb-1">
+    {{ label }}
+  </label>
+  <input
+    [type]="type"
+    [id]="id"
+    [name]="name"
+    [placeholder]="placeholder"
+    [value]="value"
+    [attr.aria-invalid]="showError"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent"
+  />
+  <div *ngIf="showError" class="text-sm text-red-600 mt-1">
+    {{ firstError }}
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="w-full flex backdrop-blur-2xl flex-col py-8 rounded-lg bg-white shadow">
+  <div class="self-center mb-2 text-xl font-light text-gray-800">{{ mode === 'add' ? 'Crear nuevo juego' : 'Editar juego' }}</div>
+  <span class="text-sm text-center text-gray-500 dark:text-gray-400">Todos los campos son requeridos</span>
+
+  <form [formGroup]="gameForm" (ngSubmit)="submitForm()" class="p-6 space-y-4">
+    <app-input label="Nombre del juego"
+               [focus]="true"
+               placeholder="Ej: Castillo inflable"
+               formControlName="name"></app-input>
+
+    <div class="flex gap-4">
+      <app-input label="Minutos base" placeholder="Ej: 10" type="number" formControlName="baseMinutes"></app-input>
+      <app-input label="Valor inicial" placeholder="Ej: 1000" type="number" formControlName="initialValue"></app-input>
+    </div>
+
+    <div class="flex gap-4">
+      <app-input label="Valor minuto" placeholder="Ej: 100" type="number" formControlName="minuteValue"></app-input>
+      <app-input label="Capacidad" placeholder="Ej: 15" type="number" formControlName="capacity"></app-input>
+    </div>
+
+    <app-button type="submit" variant="primary" [disabled]="gameForm.invalid || gameForm.pending">
+      {{ mode === 'add' ? 'Crear juego' : 'Guardar cambios' }}
+    </app-button>
+  </form>
+  <div *ngIf="mode === 'edit'" class="ml-6 mr-6">
+    <app-button variant="danger" (click)="deleteSubmit()">Eliminar juego</app-button>
+  </div>
+</div>
